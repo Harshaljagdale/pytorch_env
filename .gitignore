@@ -1,0 +1,7 @@
+lib/
+venv/
+.venv/
+env/
+bin/
+__pycache__/
+.DS_Store

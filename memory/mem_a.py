@@ -1,4 +1,5 @@
 #This code will use OpenAI text-embedding model and convert user query and vector and store into qudrant db locally.
+#This example include the qdrant vector db along with mem0 and neo4j
 
 from mem0 import Memory
 import os
@@ -9,6 +10,10 @@ import json
 load_dotenv()
 client = OpenAI()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+
 
 config = {
     "version": "v1.1",
@@ -19,6 +24,14 @@ config = {
     "llm":{
       "provider": "openai",
       "config": {"api_key": OPENAI_API_KEY, "model": "gpt-4.1"}  
+    },
+    "graph_store":{
+        "provider": "neo4j",
+        "config":{
+        "url": NEO4J_URI,
+        "username": NEO4J_USERNAME,
+        "password": NEO4J_PASSWORD           
+        }
     },
     "vector_store":{
         "provider": "qdrant",
